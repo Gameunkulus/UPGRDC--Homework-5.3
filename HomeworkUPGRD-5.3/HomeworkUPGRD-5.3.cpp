@@ -9,9 +9,9 @@ template <class T>
 class Vector{
 protected:
 
-	int actSize = 1;
-	int logSize = 1;
-	*arr;
+	int actSize = 2;
+	int logSize = 0;
+	T *arr;
 
 public:
     
@@ -35,7 +35,7 @@ public:
             if (logSize >= actSize) {
                 actSize *= 2;
                 int* newArr = new int[actSize];
-                for (int i = 0; i < logical_size; i++) {
+                for (int i = 0; i < logSize; i++) {
                     newArr[i] = arr[i];
                 }
                 *arr = *newArr;
