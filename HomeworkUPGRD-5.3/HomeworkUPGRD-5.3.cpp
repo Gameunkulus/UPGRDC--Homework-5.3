@@ -5,10 +5,65 @@
 #include <vector>
 using namespace std; 
 
+template <class T>
+class Vector{
+protected:
+
+	int actSize = 1;
+	int logSize = 1;
+	*arr;
+
+public:
+    
+	Vector() {
+		arr = new T [actSize];
+	}
+
+	Vector(int num) {
+		this->actSize = num;
+        arr = new T [actSize];
+	};
+
+	T at(int index) {
+		if (index < 0 || index > actSize) {
+			throw exception("Ошибка, значение не может ревышать допустимое значение");
+		}
+		return arr[index];
+	};
+
+	T push_back(T value) {    
+            if (logSize >= actSize) {
+                actSize *= 2;
+                int* newArr = new int[actSize];
+                for (int i = 0; i < logical_size; i++) {
+                    newArr[i] = arr[i];
+                }
+                *arr = *newArr;
+            }
+			logSize++;
+            return arr[logSize - 1] = value;			
+        }
+	
+
+	int size() {
+		return actSize;
+	};
+
+	int capacity() {
+		int num = actSize - logSize;
+		return num;
+	};
+};
+
 int main()
 {
 	setlocale(LC_ALL, "ru");
-	vector<int> my_vec1{7, 5, 16, 8};
+	Vector<int> my_vec1;
+	
+	my_vec1.push_back(7);
+	my_vec1.push_back(5);
+	my_vec1.push_back(16);
+	my_vec1.push_back(8);
 
 	cout << "Элемент под первым номером: " << my_vec1.at(0) << endl;
 
@@ -22,10 +77,10 @@ int main()
 	int num1 = 4;
 
 	my_vec1.push_back(num1);
-	cout << "Последнее добавленное число: " << my_vec1.back() << endl;
+	cout << "Последнее добавленное число: " << my_vec1.at(4) << endl;
 
-	cout << "Количество элементов в контейнере: " << my_vec1.back() << endl;
-	cout << "Количество элементов, которое может вместить контейнер до нового выделения памяти: " << my_vec1.back() << endl;
+	cout << "Количество элементов в контейнере: " << my_vec1.size() << endl;
+	cout << "Количество элементов, которое может вместить контейнер до нового выделения памяти: " << my_vec1.capacity() << endl;
 
 }
 
